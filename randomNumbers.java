@@ -37,6 +37,13 @@ public static void main(String[] args)
 	System.out.println("The two lowest values in the generated array: " + numbers[0] + " and " + numbers[1]  );  
 	
 	//Part four
+	System.out.println("Even Numbers in the generated array:");  
+    for(int i=0;i<numbers.length;i++){  
+    if(numbers[i]%2==0){  
+    System.out.println(numbers[i]);  
+    }  
+    }  
+	
 	System.out.println("Odd Numbers in the generated array:");  
     for(int i=0;i<numbers.length;i++){  
     if(numbers[i]%2!=0){  
