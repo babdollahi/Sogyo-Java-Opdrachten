@@ -19,5 +19,22 @@ public static void main(String[] args)
      if(numbers[i] > max)  
 	 max = numbers[i];  }
      System.out.println("Highest Value in the generated array: " + max);  
+	 
+	 //Part three
+	 int min; 
+	 	 for (int i = 0; i < numbers.length; i++)   
+        {  
+            for (int j = i + 1; j < numbers.length; j++)   
+            {  
+                if (numbers[i] > numbers[j])   
+                {  
+                    min = numbers[i];  
+                    numbers[i] = numbers[j];  
+                    numbers[j] = min;  
+                }  
+            }  
+        }  
+	System.out.println("The two lowest values in the generated array: " + numbers[0] + " and " + numbers[1]  );  
+
 }
 }
