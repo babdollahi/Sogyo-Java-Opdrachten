@@ -3,20 +3,16 @@ import java.util.Scanner;
 
 public class hangmanGame
 {
+
     public static void main(String[] args)
     {
-
-        //Scanner s = new Scanner(new File("filepath"));
-/*ArrayList<String> list = new ArrayList<String>();
-while (s.hasNext()){
-    list.add(s.next());
-}
-s.close(); */
         System.out.println("Starting Game");
+
         //A string including the alphabet to later show the user which letter he/she has used
         String notUsed = "abcdefghijklmnopqrstuvwxyz";
-        //defining a list of words
-        String[] words =new String[] {"Hello", "World!", "How", "Are", "You"};
+
+        //Defining a list of words
+        String[] words =new String[] {"Hello", "World!", "How", "Are", "You", "Java"};
 
         //Select a random word from the list of words by random index
         String randomword = words[(int)(Math.random() * words.length)];
@@ -39,6 +35,7 @@ s.close(); */
         //A loop that runs until the user has lives
         //By default user has 10 lives
         int lives = 10;
+
         //Define scanner to ask for input from user
         Scanner stringScanner = new Scanner(System.in);
 
@@ -116,37 +113,5 @@ s.close(); */
         }
         System.out.print("Exit the game! Try again.");
 
-        }
     }
-
-    /*File f = new File("/home/banafsheh/Learning/java-opdrachten/words.txt");
-        try{
-            ArrayList<String> lines = get_arraylist_from_file(f);
-            for(int x = 0; x < lines.size(); x++){
-                System.out.println(lines.get(x));
-            }
-        }
-        catch(Exception e){
-            e.printStackTrace();
-        }
-        System.out.println("done");
-
-    }
-    public static ArrayList<String> get_arraylist_from_file(File f) 
-        throws FileNotFoundException {
-        Scanner s;
-        ArrayList<String> list = new ArrayList<String>();
-        s = new Scanner(f);
-        while (s.hasNext()) {
-            list.add(s.next());
-        }
-        s.close();
-        return list;
-    }*/
-    /*Scanner s = new Scanner(new File("/home/banafsheh/Learning/java-opdrachten/words.txt"));
-    ArrayList<String> list = new ArrayList<String>();
-    while (s.hasNext()){
-        list.add(s.next());
-    }
-    s.close();*/
-
+}
