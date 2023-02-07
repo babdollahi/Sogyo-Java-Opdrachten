@@ -1,86 +1,123 @@
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.util.ArrayList;
+//Banafsheh Abdollahi created this java script to respond to assignment three.
 import java.util.Scanner;
-import java.util.*;
 
-public class hangmanGame{
-    //lives:
-    //input:
-    //word:
-    //not used
+public class hangmanGame
+{
+    public static void main(String[] args)
+    {
 
-    public static void main(String[] args) {
+        //Scanner s = new Scanner(new File("filepath"));
+/*ArrayList<String> list = new ArrayList<String>();
+while (s.hasNext()){
+    list.add(s.next());
+}
+s.close(); */
         System.out.println("Starting Game");
-        //defining a list of word
+        //A string including the alphabet to later show the user which letter he/she has used
+        String notUsed = "abcdefghijklmnopqrstuvwxyz";
+        //defining a list of words
         String[] words =new String[] {"Hello", "World!", "How", "Are", "You"};
 
-        // (remove) String[] words = new String[] {'computer','car','book'};
-        //select a random word from the list of words by random index
+        //Select a random word from the list of words by random index
         String randomword = words[(int)(Math.random() * words.length)];
-        int length = randomword.length();
-        System.out.println("The word has " + length + " aletters.");
 
-        //storing the letters that user is gussing (it has the same lenghth of the randomword)
+        //Printing the lenght of the random word
+        System.out.println("The word has " + randomword.length() + " letters.");
+
+        //Storing the letters that user is gussing which has the same lenghth of the randomword
         char[] letters = new char[randomword.length()];
 
         //Generate the letters array 
-        for (int i = 0; i < letters.length; i++){
-            System.out.print("-");
-
-           // letters[i] = ".";
+        for (int i = 0; i < letters.length; i++)
+        {
+            letters[i] = '-';
         }
+
         //Print an empty line
         System.out.println("");
 
-        int lives = 3;
-        while(lives > 0) {
+        //A loop that runs until the user has lives
+        //By default user has 10 lives
+        int lives = 10;
+        //Define scanner to ask for input from user
+        Scanner stringScanner = new Scanner(System.in);
+
+        while(lives > 0) 
+        {
             System.out.print("Lives: ");
-            for (int i = 0; i < lives; i++) {
+            //Print a heart to show the lives
+            for (int i = 0; i < lives; i++)
+            {
                 System.out.print("\u2665");
-
-
             }
-        
+
             System.out.println();
             System.out.println("Please enter a letter:");
-            //read user input
-            Scanner stringScanner = new Scanner(System.in);
+            //Read user input
             String input = stringScanner.next();
             
-            //take the input of user as letter
-            char letter = input.charAt(0);
+            //Take the input of user as letter and convert to lower case
+            char letter = input.toLowerCase().charAt(0);
 
-            //Printing the letter
-            //System.out.println("Remaining lives:");
+            //Defineing a boolean to check if the guess was correct
+            boolean isGuessCorrect = false;
+            //Check if the letter is in the random word
+            for (int i = 0; i < randomword.length() ; i++)
+            {
+                //Guessing the letter and convert to lower case
+                char l = randomword.toLowerCase().charAt(i);
+                if (l == letter)
+                {
+                    letters[i] = l;
+                    isGuessCorrect = true;
+                }
+            }
 
-            for (int i = 0; i < letters.length ; i++){
+            //If the guess was not correct reduce the lives
+            if (!isGuessCorrect)
+            {
+                lives = lives - 1;
+            }
+            //Add boolean to check if game is finished
+            boolean isGameFinished = true;
+
+            System.out.print("Word: ");
+
+            for (int i = 0; i < letters.length ; i++)
+            {
+                if (letters[i] == '-')
+                {
+                    isGameFinished = false;
+                }
+                //Prints - if the letter was not correct and prints the letter which guessed correct
                 System.out.print(letters[i]);
             }
 
+            System.out.println(); 
+            
+            //Replace the alphabet string with - if user has used this letter
+            notUsed = notUsed.replace(letter, '-');
+            System.out.println("Not used: " + notUsed);
 
-            boolean isGuessCorrect = false;
-            //check if the letter is in the random word
-            for (int i = 0; i < length ; i++){
-                // gussing the letter
-                char l = randomword.charAt(i);
-                if (l == letter){
-                    letters[i] = l;
-                    isGuessCorrect = true;
-                
-                }
-                //System.out.print(letters[i]);
+            System.out.println("************************************");
+            
+            //If user has won the game break the loop
+            if (isGameFinished)
+            {
+                System.out.println("You won!");
+                break;        
             }
-            //if the guess was not correct reduce the lives
-            if (!isGuessCorrect){
-                lives = lives -1;
-            }
-    }
+        }
+
+        //If user has no lives print that he/she lost
+        if (lives == 0)
+        {
+            System.out.println("You lost! The word was: " + randomword);
+        }
         System.out.print("Exit the game! Try again.");
 
-
-
         }
+    }
 
     /*File f = new File("/home/banafsheh/Learning/java-opdrachten/words.txt");
         try{
@@ -113,4 +150,3 @@ public class hangmanGame{
     }
     s.close();*/
 
-}
