@@ -25,12 +25,19 @@ public class fibonacciSequence
             num3 = num1 + num2;
             //Update the values
             num1 = num2;
-            num2 = num3; 
+            num2 = num3;
+            
+            if (num3%2 == 0)
+            {
+            counter = counter + num3;
+            }
 
-            counter += 1;
+            
         }
     //Print the results
-    System.out.print("The nth Fibonacci term is: " + num3); 
+    System.out.println("The " + n + "th Fibonacci term is: " + num3); 
+    System.out.println("The sum of all even values of the first" + n + "terms is " + counter + ".");
+
     System.out.println("");   
   
     }
