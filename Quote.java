@@ -1,4 +1,4 @@
-//package nl.sogyo.javaopdrachten.quote;
+// Banafsheh Abdollahi created this program for the Quote of the day assignment
 import java.time.LocalDate;    
 import java.time.Month;
 import java.time.DayOfWeek;
