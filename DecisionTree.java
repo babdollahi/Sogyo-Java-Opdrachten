@@ -31,7 +31,7 @@ public class  DecisionTree
 		// int lineNumber;
 		// Integer leftEdgeInt;
 
-		// List<Integer> listId = new ArrayList<Integer>();
+		List<Integer> listNodeId = new ArrayList<Integer>();
 		// Map<String, String> node = new HashMap<String, String>();
 		Map<Integer, String> node = new HashMap<Integer, String>();
 
@@ -60,6 +60,7 @@ public class  DecisionTree
 			if (String.valueOf(str.charAt(str.length() - 1)).equals("?"))
 			{
 				idInt = Character.getNumericValue(str.charAt(1));
+                listNodeId.add(idInt);
 				// String nodeId = str.split(",")[0];
 				String questionNode = str.split(",")[1];
 				node.put(idInt, questionNode.trim());
@@ -90,22 +91,24 @@ public class  DecisionTree
 
 		}   
 
-		for(int i=1;i<=5;i++){  
-	
+    //Sort node ids to start from the root
+    Collections.sort(listNodeId);
+    for (int i = 0; i < listNodeId.size(); i++) 
+    {
 		System.out.println("*************** Start Node **************");
-		String nodeId = "N" + String.valueOf(i);
+		String nodeId = "N" + String.valueOf(listNodeId.get(i));
 		System.out.println("Node ID : " + nodeId);
-		System.out.println("Node question : " + node.get(i));
+		System.out.println("Node question : " + node.get(listNodeId.get(i)));
 		System.out.println("Node left child: " + left.get(nodeId));
 		System.out.println("Node right child: " + right.get(nodeId));
 		System.out.println("Leaf at right: " + leaf.get(left.get(nodeId)));
 		System.out.println("Leaf at left: " + leaf.get(right.get(nodeId)));
 		System.out.println("*************** End Node ****************");
 
-	}
+	// }
 }
 
-
+    }
 }
 
 
