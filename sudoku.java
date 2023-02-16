@@ -120,6 +120,7 @@ public class sudoku
 
     public static void main(String[] args)
     {
+        //measuring program duration
         long startTime = System.nanoTime();
         //Defineing a two dimentional array for the board
         int[][] board= 
@@ -156,8 +157,8 @@ public class sudoku
         printBoard(board);
         System.out.println("*********************");
 
+        //measuring program duration
         long stopTime = System.nanoTime();
-        // int inSeconds = (int) (duration / 1000);
         System.out.println("Solved in " + ((stopTime - startTime)/1000000) + " mili seconds.");
 
     }
