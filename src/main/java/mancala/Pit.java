@@ -5,52 +5,48 @@ package mancala;
  * Therefore I use inheritance here.
  */
 abstract class Pit {
-    private Pit next;
-    protected int stones;
-    protected String owner;
-    protected String opponent;
+    
+    private int stones;
+    private Player owner;
+    private Pit neighbour;
 
-    Pit(int stones) {
+    Pit() {
+        
+    }
+
+    public int getStoneCount() {
+
+        return this.stones;
+    }
+
+    public void setStoneCount(int stones) {
+        
         this.stones = stones;
     }
-    
-    //Count number of stones 
-    public Integer count() {
-        return stones;
+
+    public Player getOwner() {
+        return this.owner;
     }
 
-    //Recive one stone at a time
-    public void receiveOneStone() {
-        this.stones = this.stones + 1;
-    }
-
-    //Finding the neighbour anti clockwise
-    public Pit next() {
-        return next;
-    }
-
-    //Setting the next neighbour 
-    public Pit setNext(Pit next) {
-        this.next = next;
-        return next;
-    }
-
-    //Each bowl and kalaha know their owners
-    public void setOwner(String owner) {
+    public void setOwner(Player owner) {
         this.owner = owner;
     }
 
-    public String getOwner() {
-        return owner;
+    public Pit getNeighbour() {
+        return this.neighbour;
     }
 
-    //Each bowl and kalaha know their opponents
-    public void setOpponent(String opponent) {
-        this.opponent = opponent;
+    public void setNeighbour(Pit neighbour) {
+        this.neighbour = neighbour;
     }
 
-    public String getOpponent() {
-        return opponent;
+    public Pit getNeighbour(int steps) {
+        --steps;
+        if (steps == 0) {
+            return this;
+        } else {
+            return this.neighbour.getNeighbour(steps);
+        }
     }
 
 }

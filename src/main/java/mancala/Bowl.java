@@ -1,30 +1,28 @@
 package mancala;
 
 class Bowl extends Pit {
-    Bowl(int stones) {
-        super(stones);
+
+    Bowl() {
+        this.setStoneCount(4);
+        this.setOwner(new Player());
+        this.setNeighbour(new Bowl(1, this.getOwner(), this));
+        // this.neighbourKalaha = new Kalaha();
+
     }
 
-    //Take all stones from a bowl
-    public Integer take() {
-        int stones = this.stones;
-        //After takeing all stones the bumber of stones is zero
-        this.stones = 0;
-        return stones;
-    }
 
-    //Each bowl can build another bowl
-    public static Bowl bowlBuilder(int amount) {
-        Bowl[] bowls = new Bowl[amount];
-        for (int i = 0; i < amount; i++) {
-            bowls[i] = new Bowl(4);
+    Bowl(int bowlCount, Player owner, Pit firstPit) {
+        bowlCount++;
+        this.setStoneCount(4);
+        this.setOwner(owner);
+        if (bowlCount == 6 || bowlCount == 13) {
+            this.setNeighbour(new Kalaha(bowlCount, this.getOwner(), firstPit));
+        } else if (bowlCount < 14) {
+            this.setNeighbour(new Bowl(bowlCount, this.getOwner(), firstPit));
         }
-        for (int i = 0; i < amount; i++) {
-            if (i < amount - 2) {
-                bowls[i].setNext(bowls[i+1]);
-            }
+        if (bowlCount == 14) {
+            this.setNeighbour(firstPit);
         }
-        return bowls[0];
     }
 
 }
