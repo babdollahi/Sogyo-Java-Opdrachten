@@ -6,7 +6,7 @@ package mancala;
  */
 abstract class Pit {
     
-    private int stones;
+    protected int stones;
     private Player owner;
     private Pit neighbour;
 
@@ -49,4 +49,15 @@ abstract class Pit {
         }
     }
 
+    public void receiveOneStone() {
+        this.stones = this.stones + 1;
+    }
+
+    public Integer takeAllStones() {
+        int stones = this.stones;
+        this.stones = 0;
+        return stones;
+    }
+
+  
 }

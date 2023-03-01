@@ -1,6 +1,10 @@
 package mancala;
 
 class Kalaha extends Pit {
+    int multipleStones;
+
+    public Kalaha() {
+    }
 
     Kalaha(int bowlCount, Player owner, Pit firstPit) {
         bowlCount++;
@@ -12,6 +16,10 @@ class Kalaha extends Pit {
         if (bowlCount == 14) {
             this.setNeighbour(firstPit);
         }
+    }
+
+    public void receiveMultipleStones(int multipleStones) {
+        this.stones = stones + multipleStones; 
     }
 
 }

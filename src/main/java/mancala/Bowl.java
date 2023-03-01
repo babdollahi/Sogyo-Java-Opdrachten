@@ -1,15 +1,16 @@
 package mancala;
 
 class Bowl extends Pit {
+    int bowlToStartGame;
+    int oppositeBowlIndex;
+    // private Pit playBowl;
 
     Bowl() {
         this.setStoneCount(4);
         this.setOwner(new Player());
         this.setNeighbour(new Bowl(1, this.getOwner(), this));
-        // this.neighbourKalaha = new Kalaha();
 
     }
-
 
     Bowl(int bowlCount, Player owner, Pit firstPit) {
         bowlCount++;
@@ -25,5 +26,22 @@ class Bowl extends Pit {
         }
     }
 
-}
+    public int playBowl(int bowlToStartGame) {
+        Pit playBowl = this.getNeighbour(bowlToStartGame);
+        int stonesInBowl = playBowl.getStoneCount();
+        playBowl.takeAllStones();
+        for (int i = bowlToStartGame + 1; i <= bowlToStartGame + stonesInBowl; i++) {
+            this.getNeighbour(i).receiveOneStone();
 
+            if ((this.getNeighbour(i) instanceof Bowl) && (this.getNeighbour(i).getStoneCount() == 1)) {
+
+                oppositeBowlIndex = 13 - i ;
+                return oppositeBowlIndex;
+            }
+        }
+
+        return 0;
+
+    }
+
+}
