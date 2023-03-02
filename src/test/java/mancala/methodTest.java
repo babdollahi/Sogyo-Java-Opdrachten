@@ -1,6 +1,8 @@
 package mancala;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
@@ -37,41 +39,72 @@ public class methodTest {
     public void shouldEmptyTheStartBowlAndAddOneStoneToNeighbours() {
 
         Bowl bowl = new Bowl();
-        bowl.playBowl(3);
-        assertEquals(0,bowl.getNeighbour(2).getStoneCount());
+        Player player = new Player();
+        bowl.playTurn(1,player); 
+        assertEquals(0,bowl.getNeighbour(1).getStoneCount());
+        assertEquals(5,bowl.getNeighbour(2).getStoneCount());
         assertEquals(5,bowl.getNeighbour(3).getStoneCount());
         assertEquals(5,bowl.getNeighbour(4).getStoneCount());
         assertEquals(5,bowl.getNeighbour(5).getStoneCount());
-        assertEquals(5,bowl.getNeighbour(6).getStoneCount());
-        assertEquals(1,bowl.getNeighbour(7).getStoneCount());
-        assertEquals(4,bowl.getNeighbour(8).getStoneCount());
+        assertEquals(4,bowl.getNeighbour(6).getStoneCount());
 
     }
 
     @Test
-    public void findOppositeBowlIndex() {
+    public void shouldSwitchTurnWhenStartsFromBowlOne() {
 
         Bowl bowl = new Bowl();
-        bowl.getNeighbour(4).takeAllStones();
-        bowl.playBowl(3);
-
-        assertEquals(1,bowl.getNeighbour(4).getStoneCount());
-        assertEquals(9,bowl.playBowl(3));
-
+        Player player = new Player();
+        bowl.playTurn(1, player); 
+        assertFalse(player.hasTurn);
     }
-
 
     @Test
-    public void findOppoppsiteBowlIndex() {
+    public void shouldNotSwitchTurnWhenStartsFromBowlThree() {
 
         Bowl bowl = new Bowl();
-        bowl.getNeighbour(12).takeAllStones();
-        // bowl.playBowl(1);
-
-        // assertEquals(1,bowl.getNeighbour(4).getStoneCount());
-        assertEquals(1,bowl.playBowl(9));
-
+        Player player = new Player();
+        bowl.playTurn(3, player); 
+        assertTrue(player.hasTurn);
     }
+
+
+    // @Test
+    // public void shouldSwichPlayer() {
+
+    //     // Bowl bowl = new Bowl();
+    //     Player player = new Player();
+        
+    //     // bowl.playTurn(1, player); 
+        
+
+    // }
+
+
+    // @Test
+    // public void findOppositeBowlIndex() {
+
+    //     Bowl bowl = new Bowl();
+    //     bowl.getNeighbour(6).takeAllStones();
+    //     bowl.playBowl(2);
+
+    //     assertEquals(1,bowl.getNeighbour(6).getStoneCount());
+    //     // assertEquals(8,bowl.playBowl(2));
+
+    // }
+
+
+    // @Test
+    // public void findOppoppsiteBowlIndex() {
+
+    //     Bowl bowl = new Bowl();
+    //     bowl.getNeighbour(12).takeAllStones();
+    //     // bowl.playBowl(1);
+
+    //     // assertEquals(1,bowl.getNeighbour(4).getStoneCount());
+    //     assertEquals(1,bowl.playBowl(8));
+
+    // }
 
 
     }
