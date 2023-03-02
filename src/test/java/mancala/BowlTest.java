@@ -93,6 +93,19 @@ public class BowlTest {
     }
 
     // @Test
+    // public void bowlsOfOpponent() {
+
+    //     Bowl bowl = new Bowl();
+    //     Pit targetPitOp= bowl.getNeighbour(12);
+    //     // targetPitOp.getOwner();
+    //     Pit targetPitPl = bowl.getNeighbour(7);
+    //     // targetPitPl.getOwner();
+    //     // assertNotNull(targetPit);
+    //     // assertEquals(0,targetPit.getStoneCount());
+    //     assertSame(targetPitOp.getOwner(),targetPitPl.getOwner());
+    // }
+
+    // @Test
     // public void bowlAndKalahaShouldReceiveOneStone() {
 
     //     Bowl bowl = new Bowl();

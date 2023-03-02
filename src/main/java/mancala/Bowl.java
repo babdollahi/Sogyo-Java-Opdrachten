@@ -26,22 +26,59 @@ class Bowl extends Pit {
         }
     }
 
-    public int playBowl(int bowlToStartGame) {
+    public void playTurn(int bowlToStartGame, Player whoIsTurn) {
         Pit playBowl = this.getNeighbour(bowlToStartGame);
+        playBowl.setOwner(whoIsTurn);
         int stonesInBowl = playBowl.getStoneCount();
         playBowl.takeAllStones();
-        for (int i = bowlToStartGame + 1; i <= bowlToStartGame + stonesInBowl; i++) {
-            this.getNeighbour(i).receiveOneStone();
+        int bowlToEndGame = bowlToStartGame + stonesInBowl;
+        int stolenStones = 0;
+        Kalaha kalahaOfOwner = new Kalaha();
 
-            if ((this.getNeighbour(i) instanceof Bowl) && (this.getNeighbour(i).getStoneCount() == 1)) {
+        for (int i = bowlToStartGame + 1 ; i <=  bowlToEndGame ; i++) {
 
-                oppositeBowlIndex = 13 - i ;
-                return oppositeBowlIndex;
+            if ((this.getNeighbour(i) instanceof Kalaha)) {
+                if (this.getNeighbour(i).getOwner() ==  playBowl.getOwner() ) {
+                    kalahaOfOwner = (Kalaha) this.getNeighbour(i);
+                    this.getNeighbour(i).receiveOneStone();
+                }
+                else {
+                    this.getNeighbour(i).receiveZeroStone();
+                }
+            }
+            else {
+                this.getNeighbour(i).receiveOneStone();
+                if ((bowlToEndGame - i ) == 0) {
+                    whoIsTurn.swichPlayer();
+                    
+                }
             }
         }
 
-        return 0;
+        if ((this.getNeighbour(bowlToEndGame) instanceof Bowl) &&
+            (this.getNeighbour(bowlToEndGame).getOwner() == playBowl.getOwner()) &&
+            (this.getNeighbour( bowlToEndGame).getStoneCount() == 1)) {
 
+            stolenStones = this.getNeighbour(14 - bowlToEndGame).getStoneCount();
+            this.getNeighbour(14 - bowlToEndGame).takeAllStones();
+        }
+        kalahaOfOwner.receiveMultipleStones(stolenStones + 1);
+        gameEnded(whoIsTurn);
     }
 
+
+    public void gameEnded(Player whoIsTurn) {
+        int stonesInBowlsAfterTurnPlayer = 0;
+        int stonesInBowlsAfterTurnOpponent = 0;
+        for (int i = 1 ; i <  7 ; i++) {
+            stonesInBowlsAfterTurnPlayer = stonesInBowlsAfterTurnPlayer + this.getNeighbour(i).getStoneCount();
+        }
+        for (int i = 8 ; i <  14 ; i++) {
+            stonesInBowlsAfterTurnOpponent  = stonesInBowlsAfterTurnOpponent + this.getNeighbour(i).getStoneCount();
+        }
+
+        if (stonesInBowlsAfterTurnPlayer == 0 || stonesInBowlsAfterTurnOpponent == 0 ) {
+            whoIsTurn.noOnePlays();
+            }
+    }
 }
