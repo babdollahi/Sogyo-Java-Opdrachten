@@ -8,7 +8,7 @@ public class PlayerTest {
     @Test
     public void shouldHaveAnOpponent() {
         Player player = new Player();
-        // assertNotNull(player.getOpponent());
+        assertNotNull(player.getOpponent());
     }
 
 }
