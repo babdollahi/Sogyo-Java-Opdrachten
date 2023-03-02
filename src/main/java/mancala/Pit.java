@@ -53,10 +53,18 @@ abstract class Pit {
         this.stones = this.stones + 1;
     }
 
+    public void receiveZeroStone() {
+        this.stones = this.stones + 0 ;
+    }
+
     public Integer takeAllStones() {
         int stones = this.stones;
         this.stones = 0;
         return stones;
+    }
+
+    public void receiveMultipleStones(int multipleStones) {
+        this.stones = stones + multipleStones; 
     }
 
   
