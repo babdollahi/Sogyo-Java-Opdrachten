@@ -2,6 +2,7 @@ package mancala;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
@@ -67,6 +68,57 @@ public class methodTest {
         bowl.playTurn(3, player); 
         assertTrue(player.hasTurn);
     }
+
+
+    @Test
+    public void shouldEndGame() {
+        Bowl bowl = new Bowl();
+        Player player = new Player();
+        Player opponent = new Player(player);
+        bowl.playTurn(2, player); 
+
+        bowl.getNeighbour(1).takeAllStones();
+        bowl.getNeighbour(3).takeAllStones();
+        bowl.getNeighbour(4).takeAllStones();
+        bowl.getNeighbour(5).takeAllStones();
+        bowl.getNeighbour(6).takeAllStones();
+
+        assertFalse(player.hasTurn);
+        assertFalse(opponent.hasTurn);
+
+    }
+
+
+    @Test 
+    public void ShouldStealStoneFromBowlEight() {
+        Bowl bowl = new Bowl();
+        // Player player = new Player();
+        bowl.getOwner();
+        // Player opponent = new Player(bowl.getOwner());
+        bowl.getNeighbour(6).takeAllStones();
+        bowl.playTurn(2, bowl.getOwner()); 
+        assertEquals(1, bowl.getNeighbour(6).getStoneCount());
+
+        assertEquals(0, bowl.getNeighbour(8).getStoneCount());
+        // assertEquals(5, bowl.getNeighbour(7).getStoneCount());
+
+        // assertSame(bowl.getNeighbour(2).getOwner(), bowl.getNeighbour(6).getOwner());
+
+        // assertEquals(5, bowl.getNeighbour(7).getStoneCount());
+
+    }
+    // @Test
+    // public void shouldSwichPlayer(){
+    //     Bowl bowl = new Bowl();
+    //     Player player = new Player();
+    //     Player opponent = new Player(player);
+    //     bowl.playTurn(1, player); 
+
+    //     assertFalse(player.hasTurn);
+    //     assertTrue(opponent.hasTurn);
+
+    // }
+
 
 
     // @Test

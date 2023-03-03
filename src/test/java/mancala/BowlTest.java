@@ -92,6 +92,8 @@ public class BowlTest {
         assertSame(bowl, bowl.getNeighbour(15));
     }
 
+
+ 
     // @Test
     // public void bowlsOfOpponent() {
 

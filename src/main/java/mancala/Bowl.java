@@ -3,7 +3,6 @@ package mancala;
 class Bowl extends Pit {
     int bowlToStartGame;
     int oppositeBowlIndex;
-    // private Pit playBowl;
 
     Bowl() {
         this.setStoneCount(4);
@@ -34,15 +33,18 @@ class Bowl extends Pit {
         int bowlToEndGame = bowlToStartGame + stonesInBowl;
         int stolenStones = 0;
         Kalaha kalahaOfOwner = new Kalaha();
+        Kalaha kalahaOfOpponent = new Kalaha();
 
         for (int i = bowlToStartGame + 1 ; i <=  bowlToEndGame ; i++) {
 
             if ((this.getNeighbour(i) instanceof Kalaha)) {
                 if (this.getNeighbour(i).getOwner() ==  playBowl.getOwner() ) {
                     kalahaOfOwner = (Kalaha) this.getNeighbour(i);
+
                     this.getNeighbour(i).receiveOneStone();
                 }
                 else {
+                    kalahaOfOpponent = (Kalaha) this.getNeighbour(i);
                     this.getNeighbour(i).receiveZeroStone();
                 }
             }
@@ -56,28 +58,28 @@ class Bowl extends Pit {
         }
 
         if ((this.getNeighbour(bowlToEndGame) instanceof Bowl) &&
-            (this.getNeighbour(bowlToEndGame).getOwner() == playBowl.getOwner()) &&
-            (this.getNeighbour( bowlToEndGame).getStoneCount() == 1)) {
-
+            (this.getNeighbour(bowlToEndGame).getOwner() == playBowl.getOwner())
+            && (this.getNeighbour( bowlToEndGame).getStoneCount() == 1)) {
             stolenStones = this.getNeighbour(14 - bowlToEndGame).getStoneCount();
             this.getNeighbour(14 - bowlToEndGame).takeAllStones();
         }
-        kalahaOfOwner.receiveMultipleStones(stolenStones + 1);
+
+        kalahaOfOwner.receiveMultipleStones(stolenStones);
         gameEnded(whoIsTurn);
+        kalahaOfOwner.whoIsWinner(kalahaOfOpponent);
     }
 
-
     public void gameEnded(Player whoIsTurn) {
-        int stonesInBowlsAfterTurnPlayer = 0;
-        int stonesInBowlsAfterTurnOpponent = 0;
+        int sumStonesInBowlsPlayer = 0;
+        int sumStonesInBowlsOpponent = 0;
         for (int i = 1 ; i <  7 ; i++) {
-            stonesInBowlsAfterTurnPlayer = stonesInBowlsAfterTurnPlayer + this.getNeighbour(i).getStoneCount();
+            sumStonesInBowlsPlayer = sumStonesInBowlsPlayer + this.getNeighbour(i).getStoneCount();
         }
         for (int i = 8 ; i <  14 ; i++) {
-            stonesInBowlsAfterTurnOpponent  = stonesInBowlsAfterTurnOpponent + this.getNeighbour(i).getStoneCount();
+            sumStonesInBowlsOpponent  = sumStonesInBowlsOpponent + this.getNeighbour(i).getStoneCount();
         }
 
-        if (stonesInBowlsAfterTurnPlayer == 0 || stonesInBowlsAfterTurnOpponent == 0 ) {
+        if (sumStonesInBowlsPlayer == 0 || sumStonesInBowlsOpponent == 0 ) {
             whoIsTurn.noOnePlays();
             }
     }
