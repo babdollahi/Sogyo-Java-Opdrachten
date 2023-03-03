@@ -40,8 +40,7 @@ public class methodTest {
     public void shouldEmptyTheStartBowlAndAddOneStoneToNeighbours() {
 
         Bowl bowl = new Bowl();
-        Player player = new Player();
-        bowl.playTurn(1,player); 
+        bowl.playTurn(1); 
         assertEquals(0,bowl.getNeighbour(1).getStoneCount());
         assertEquals(5,bowl.getNeighbour(2).getStoneCount());
         assertEquals(5,bowl.getNeighbour(3).getStoneCount());
@@ -55,8 +54,8 @@ public class methodTest {
     public void shouldSwitchTurnWhenStartsFromBowlOne() {
 
         Bowl bowl = new Bowl();
-        Player player = new Player();
-        bowl.playTurn(1, player); 
+        Player player = bowl.getOwner();
+        bowl.playTurn(1); 
         assertFalse(player.hasTurn);
     }
 
@@ -64,8 +63,8 @@ public class methodTest {
     public void shouldNotSwitchTurnWhenStartsFromBowlThree() {
 
         Bowl bowl = new Bowl();
-        Player player = new Player();
-        bowl.playTurn(3, player); 
+        Player player = bowl.getOwner();
+        bowl.playTurn(3); 
         assertTrue(player.hasTurn);
     }
 
@@ -73,9 +72,9 @@ public class methodTest {
     @Test
     public void shouldEndGame() {
         Bowl bowl = new Bowl();
-        Player player = new Player();
+        Player player = bowl.getOwner();
         Player opponent = new Player(player);
-        bowl.playTurn(2, player); 
+        bowl.playTurn(2); 
 
         bowl.getNeighbour(1).takeAllStones();
         bowl.getNeighbour(3).takeAllStones();
@@ -85,22 +84,48 @@ public class methodTest {
 
         assertFalse(player.hasTurn);
         assertFalse(opponent.hasTurn);
-
     }
 
 
-    @Test 
-    public void ShouldStealStoneFromBowlEight() {
+    @Test
+    public void shouldEndGameIfBothPlayersHaveEmptyBowls() {
         Bowl bowl = new Bowl();
-        bowl.getOwner();
+        Player player = bowl.getOwner();
+        Player opponent = new Player(player);
+        bowl.playTurn(2); 
+
+        bowl.getNeighbour(1).takeAllStones();
+        bowl.getNeighbour(3).takeAllStones();
+        bowl.getNeighbour(4).takeAllStones();
+        bowl.getNeighbour(5).takeAllStones();
         bowl.getNeighbour(6).takeAllStones();
-        bowl.playTurn(2, bowl.getOwner()); 
+
+        bowl.getNeighbour(8).takeAllStones();
+        bowl.getNeighbour(9).takeAllStones();
+        bowl.getNeighbour(10).takeAllStones();
+        bowl.getNeighbour(11).takeAllStones();
+        bowl.getNeighbour(12).takeAllStones();
+        bowl.getNeighbour(13).takeAllStones();
+
+        assertFalse(player.hasTurn);
+        assertFalse(opponent.hasTurn);
+    }
+    
+
+
+    @Test 
+    public void ShouldStealStoneFromBowlEightAndThemWithOneStoneFromBowlTwoToKalaha() {
+        Bowl bowl = new Bowl();
+        bowl.getNeighbour(6).takeAllStones();
+        bowl.playTurn(2); 
 
         assertEquals(1, bowl.getNeighbour(6).getStoneCount());
         assertEquals(0, bowl.getNeighbour(8).getStoneCount());
         assertEquals(5, bowl.getNeighbour(7).getStoneCount());
-
+        assertEquals(0, bowl.getNeighbour(14).getStoneCount());
     }
+
+   
     // @Test
     // public void shouldSwichPlayer(){
     //     Bowl bowl = new Bowl();

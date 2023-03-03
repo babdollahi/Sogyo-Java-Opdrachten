@@ -41,6 +41,9 @@ abstract class Pit {
     }
 
     public Pit getNeighbour(int steps) {
+        // if (steps < 0) {
+        //     throw new IllegalArgumentException("steps can't be negative");
+        // }
         --steps;
         if (steps == 0) {
             return this;
@@ -67,12 +70,42 @@ abstract class Pit {
         this.stones = stones + multipleStones; 
     }
     
-    public Player whoIsWinner(Pit kalahaOpponent) { 
-        if (this.getStoneCount() > kalahaOpponent.getStoneCount()) {
-        return this.getOwner();
+    // public Player whoIsWinner(Pit kalahaOpponent) { 
+        
+    //     if (this.getStoneCount() > kalahaOpponent.getStoneCount()) {
+    //     return this.getOwner();
+    //     }
+    //     else {
+    //         return kalahaOpponent.getOwner();
+    //     }
+    // }
+    public String whoIsWinner(int bowlToStartGame) { 
+        int sumStonePlayerKalaha = 0;
+        int sumStoneOpponentKalaha = 0;
+        String winner = "";
+        for (int i = 1 ; i <=  14 ; i++) {
+            if ((this.getNeighbour(i) instanceof Kalaha)) {
+                if (this.getNeighbour(i).getOwner() == this.getNeighbour(bowlToStartGame).getOwner()) {
+                sumStonePlayerKalaha = this.getNeighbour(i).getStoneCount();
+            }
+            else {
+                sumStoneOpponentKalaha = this.getNeighbour(i).getStoneCount();
+            }
+        
+            if ( sumStonePlayerKalaha > sumStoneOpponentKalaha) {
+               winner = "Player is winner!";
+                }
+                else {
+                winner = "Opponent is winner!";
+                }
+            }
         }
-        else {
-            return kalahaOpponent.getOwner();
+        return winner;
+    }
+
+    public void printGameCondition() {
+        for (int i =1; i <= 14; i ++) {
+        System.out.println("Stones in pit " + i + " : " +  this.getNeighbour(i).getStoneCount());
         }
     }
 
