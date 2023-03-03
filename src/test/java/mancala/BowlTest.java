@@ -92,4 +92,29 @@ public class BowlTest {
         assertSame(bowl, bowl.getNeighbour(15));
     }
 
+    @Test
+    public void when_distributing_stones_the_count_should_increase_by_1() {
+
+        Bowl bowl = new Bowl();
+        bowl.distribute(1);
+        assertEquals(5, bowl.getStoneCount());
+    }
+
+    @Test
+    public void when_distributing_0_stones_the_count_should_not_increase() {
+
+        Bowl bowl = new Bowl();
+        bowl.distribute(0);
+        assertEquals(4, bowl.getStoneCount());
+    }
+
+    @Test
+    public void when_distributing_2_stones_the_count_of_the_neighbour_should_also_increase_by_1() {
+
+        Bowl bowl = new Bowl();
+        bowl.distribute(2);
+        assertEquals(5, bowl.getStoneCount());
+        assertEquals(5, bowl.getNeighbour().getStoneCount());
+    }
+
 }

@@ -100,5 +100,13 @@ abstract class Pit {
         }
     }
 
-  
+    protected void distribute(int stones) {
+        if (stones > 0) {
+            this.stones++;
+        }
+        if (--stones > 0) {
+            this.getNeighbour().distribute(stones);
+        }
+    }
+    
 }
