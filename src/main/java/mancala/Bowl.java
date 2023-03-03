@@ -32,19 +32,14 @@ class Bowl extends Pit {
         playBowl.takeAllStones();
         int bowlToEndGame = bowlToStartGame + stonesInBowl;
         int stolenStones = 0;
-        Kalaha kalahaOfOwner = new Kalaha();
-        Kalaha kalahaOfOpponent = new Kalaha();
 
         for (int i = bowlToStartGame + 1 ; i <=  bowlToEndGame ; i++) {
 
             if ((this.getNeighbour(i) instanceof Kalaha)) {
                 if (this.getNeighbour(i).getOwner() ==  playBowl.getOwner() ) {
-                    kalahaOfOwner = (Kalaha) this.getNeighbour(i);
-
                     this.getNeighbour(i).receiveOneStone();
                 }
                 else {
-                    kalahaOfOpponent = (Kalaha) this.getNeighbour(i);
                     this.getNeighbour(i).receiveZeroStone();
                 }
             }
@@ -64,9 +59,9 @@ class Bowl extends Pit {
             this.getNeighbour(14 - bowlToEndGame).takeAllStones();
         }
 
-        kalahaOfOwner.receiveMultipleStones(stolenStones);
+        this.getNeighbour(findMyKalahaIndex(bowlToStartGame)).receiveMultipleStones(stolenStones+1);
         gameEnded(whoIsTurn);
-        kalahaOfOwner.whoIsWinner(kalahaOfOpponent);
+        this.getNeighbour(findMyKalahaIndex(bowlToStartGame)).whoIsWinner(this.getNeighbour(findMyOpponentKalahaIndex(bowlToStartGame)));
     }
 
     public void gameEnded(Player whoIsTurn) {
@@ -82,5 +77,31 @@ class Bowl extends Pit {
         if (sumStonesInBowlsPlayer == 0 || sumStonesInBowlsOpponent == 0 ) {
             whoIsTurn.noOnePlays();
             }
+    }
+
+    public int findMyKalahaIndex(int bowlToStartGame) {
+        int Kalaha = 0;
+        for (int i = bowlToStartGame + 1 ; i <=  14 ; i++) {
+            if ((this.getNeighbour(i) instanceof Kalaha)) {
+                Kalaha = i;
+            break;
+            }
+        }
+        return Kalaha;
+    }
+
+    public int findMyOpponentKalahaIndex(int bowlToStartGame) {
+        int Kalaha = 0;
+        int counter = 0;
+        for (int i = bowlToStartGame + 1 ; i <=  14 ; i++) {
+            if ((this.getNeighbour(i) instanceof Kalaha)) {
+                counter = counter + 1;
+                if (counter == 2) {
+                    Kalaha = i;
+                break;
+                }
+            }
+        }
+        return Kalaha;
     }
 }

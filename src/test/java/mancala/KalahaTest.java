@@ -12,8 +12,8 @@ public class KalahaTest {
         Player owner =  new Player();
         Player opponent = new Player(owner);
 
-        Kalaha kalahaOwner = new Kalaha(7, owner, bowl.getNeighbour(1)); 
-        Kalaha kalahaOpponent = new Kalaha(14, opponent, bowl.getNeighbour(1)); 
+        Pit kalahaOwner = new Kalaha(7, owner, bowl.getNeighbour(1)); 
+        Pit kalahaOpponent = new Kalaha(14, opponent, bowl.getNeighbour(1)); 
         kalahaOwner.receiveMultipleStones(20);
         kalahaOpponent.receiveMultipleStones(6);
 

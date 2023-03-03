@@ -22,13 +22,5 @@ class Kalaha extends Pit {
         this.stones = stones + multipleStones; 
     }
 
-    public Player whoIsWinner(Kalaha kalahaOpponent) { 
-        if (this.getStoneCount() > kalahaOpponent.getStoneCount()) {
-        return this.getOwner();
-        }
-        else {
-            return kalahaOpponent.getOwner();
-        }
-    }
 
 }

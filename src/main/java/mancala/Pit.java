@@ -66,6 +66,15 @@ abstract class Pit {
     public void receiveMultipleStones(int multipleStones) {
         this.stones = stones + multipleStones; 
     }
+    
+    public Player whoIsWinner(Pit kalahaOpponent) { 
+        if (this.getStoneCount() > kalahaOpponent.getStoneCount()) {
+        return this.getOwner();
+        }
+        else {
+            return kalahaOpponent.getOwner();
+        }
+    }
 
   
 }

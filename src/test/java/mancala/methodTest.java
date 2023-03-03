@@ -92,19 +92,13 @@ public class methodTest {
     @Test 
     public void ShouldStealStoneFromBowlEight() {
         Bowl bowl = new Bowl();
-        // Player player = new Player();
         bowl.getOwner();
-        // Player opponent = new Player(bowl.getOwner());
         bowl.getNeighbour(6).takeAllStones();
         bowl.playTurn(2, bowl.getOwner()); 
+
         assertEquals(1, bowl.getNeighbour(6).getStoneCount());
-
         assertEquals(0, bowl.getNeighbour(8).getStoneCount());
-        // assertEquals(5, bowl.getNeighbour(7).getStoneCount());
-
-        // assertSame(bowl.getNeighbour(2).getOwner(), bowl.getNeighbour(6).getOwner());
-
-        // assertEquals(5, bowl.getNeighbour(7).getStoneCount());
+        assertEquals(5, bowl.getNeighbour(7).getStoneCount());
 
     }
     // @Test
