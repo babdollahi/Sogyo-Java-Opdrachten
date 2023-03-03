@@ -26,6 +26,5 @@ public interface PlayMancala {
         bowl.printGameCondition();
 
     }
-
         
 }

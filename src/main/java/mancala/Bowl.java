@@ -27,26 +27,17 @@ class Bowl extends Pit {
 
     public void playTurn(int bowlToStartGame) {
         Pit playBowl = this.getNeighbour(bowlToStartGame);
-        // this.setOwner(whoIsTurn);
-        // playBowl.setOwner(whoIsTurn);
-
         int stonesInBowl = playBowl.getStoneCount();
         playBowl.takeAllStones();
         int bowlToEndGame = bowlToStartGame + stonesInBowl;
-        // int ownerKalahaIndex = 0;
-        // int opponentKalahaIndex  =0;
         int stolenStones = 0;
-        // stolenStones = stealStone(bowlToStartGame, bowlToEndGame);
 
         for (int i = bowlToStartGame + 1 ; i <=  bowlToEndGame ; i++) {
               if ((this.getNeighbour(i) instanceof Kalaha)) {
                 if (this.getNeighbour(i).getOwner() ==  playBowl.getOwner() ) {
                     this.getNeighbour(i).receiveOneStone();
-                    // this.getNeighbour(i).receiveMultipleStones(stolenStones);
-                    // ownerKalahaIndex = i;
                 }
                 else {
-                    // opponentKalahaIndex  = i;
                     this.getNeighbour(i).receiveZeroStone();
                 }
             }
@@ -73,29 +64,8 @@ class Bowl extends Pit {
             
             }
         }
-
-        // //Adding stolen stones to my Kalaha
-        // this.getNeighbour(ownerKalahaIndex);
-        // stealStone(bowlToStartGame, bowlToEndGame);
-        // receiveMultipleStones();
-        //Check if game ended
         gameEnded(this.getOwner());
         this.whoIsWinner(bowlToEndGame);
-        // //Find the winner 
-        // this.getNeighbour(ownerKalahaIndex)
-        //     .whoIsWinner(
-        //         this.getNeighbour(opponentKalahaIndex ));
-
-        // //Adding stolen stones to my Kalaha
-        // this.getNeighbour(findMyKalahaIndex(bowlToStartGame)).receiveMultipleStones(stealStone(bowlToStartGame, bowlToEndGame));
-        // //Check if game ended
-        // gameEnded(whoIsTurn);
-        // //Find the winner 
-        // this.getNeighbour(findMyKalahaIndex(bowlToStartGame))
-        //     .whoIsWinner(
-        //         this.getNeighbour(findMyOpponentKalahaIndex(bowlToStartGame)));
-
-        
     }
 
     public boolean gameEnded(Player whoIsTurn) {
@@ -114,45 +84,4 @@ class Bowl extends Pit {
             }
         return continueGame;
     }
-
-    // public int findMyKalahaIndex(int bowlToStartGame) {
-    //     int Kalaha = 0;
-    //     for (int i = bowlToStartGame + 1 ; i <=  14 ; i++) {
-    //         if ((this.getNeighbour(i) instanceof Kalaha)) {
-    //             Kalaha = i;
-    //         break;
-    //         }
-    //     }
-    //     return Kalaha;
-    // }
-
-    // public int findMyOpponentKalahaIndex(int bowlToStartGame) {
-    //     int Kalaha = 0;
-    //     int counter = 0;
-    //     for (int i = bowlToStartGame + 1 ; i <=  14 ; i++) {
-    //         if ((this.getNeighbour(i) instanceof Kalaha)) {
-    //             counter = counter + 1;
-    //             if (counter == 2) {
-    //                 Kalaha = i;
-    //             break;
-    //             }
-    //         }
-    //     }
-    //     return Kalaha;
-    // }
-
-    // public int stealStone(int bowlToStartGame, int bowlToEndGame) {
-    //     int stolenStones = 0;
-    //     if ((this.getNeighbour(bowlToEndGame) instanceof Bowl) &&
-    //         (this.getNeighbour(bowlToEndGame).getOwner() == this.getNeighbour(bowlToStartGame).getOwner()) && 
-    //         (this.getNeighbour( bowlToEndGame).getStoneCount() == 1)) {
-    //         //Plus one to add also the stone from the player's bowl
-    //             stolenStones = (this.getNeighbour(14 - bowlToEndGame).getStoneCount()) + 1;
-    //             this.getNeighbour(14 - bowlToEndGame).takeAllStones();
-    //     }
-    //     return stolenStones;
-
-    // }
-
-
 }
