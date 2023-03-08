@@ -117,4 +117,17 @@ public class BowlTest {
         assertEquals(5, bowl.getNeighbour().getStoneCount());
     }
 
+    @Test
+    public void sholdHaveZeroStonesInNeighbour7() {
+
+        Bowl bowl = new Bowl();
+        Pit targetPit = bowl.getNeighbour(1);
+        Pit kalahaPit = bowl.getNeighbour(1).findMyKalaha();
+        kalahaPit.getOwner();
+        targetPit.getOwner();
+        assertTrue(kalahaPit instanceof Kalaha);
+        assertEquals(0, kalahaPit.getStoneCount());
+
+    }
+
 }

@@ -108,5 +108,30 @@ abstract class Pit {
             this.getNeighbour().distribute(stones);
         }
     }
-    
+
+    public Pit findMyKalaha() {
+        Pit myKalaha = new Kalaha();
+        if ((this.getOwner() == this.getNeighbour().getOwner()) && 
+            this.getNeighbour() instanceof Kalaha) {
+             myKalaha = this.getNeighbour();
+        }
+        else {
+            this.getNeighbour().findMyKalaha();
+        }
+        return myKalaha;
+    }
+
+    public Pit findMyOpponentKalaha() {
+        Pit myOpponentKalaha = new Kalaha();
+        if ((this.getOwner() != this.getNeighbour().getOwner()) && 
+            this.getNeighbour() instanceof Kalaha) {
+             myOpponentKalaha = this.getNeighbour();
+        }
+        else {
+            this.getNeighbour().findMyOpponentKalaha();
+        }
+        return myOpponentKalaha;
+    }
+
+
 }

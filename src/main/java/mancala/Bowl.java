@@ -86,21 +86,4 @@ class Bowl extends Pit {
         return continueGame;
     }
 
-    public void giveAllStonesToNeighbour(int bowlToStartGame) {
-        this.getNeighbour(bowlToStartGame + 1).receiveMultipleStones
-            (this.getNeighbour(bowlToStartGame).getStoneCount());
-        this.getNeighbour(bowlToStartGame).takeAllStones();
-
-    }
-
-    public void keepOneStoneForYourSelf(int neighbour) {
-        this.getNeighbour(neighbour).getStoneCount();
-        this.getNeighbour(neighbour+1).getStoneCount().receiveMultipleStones(?);
-
-    }
-
-    public int steps(int bowlToStartGame) {
-        return this.getNeighbour(bowlToStartGame).getStoneCount();
-    }
-
 }
